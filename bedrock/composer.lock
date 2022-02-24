@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fb56c6333648fa5cd746ca93ec4a6e5",
+    "content-hash": "0c21923ab9e32b2f23fc6e6dda42e151",
     "packages": [
         {
             "name": "composer/installers",
@@ -1052,6 +1052,42 @@
                 }
             ],
             "time": "2021-12-12T23:22:04+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/jwt-auth",
+            "version": "2.1.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/jwt-auth/",
+                "reference": "tags/2.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/jwt-auth.2.1.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/jwt-auth/"
+        },
+        {
+            "name": "wpackagist-plugin/query-monitor",
+            "version": "3.8.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/query-monitor/",
+                "reference": "tags/3.8.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/query-monitor.3.8.2.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/query-monitor/"
         }
     ],
     "packages-dev": [
