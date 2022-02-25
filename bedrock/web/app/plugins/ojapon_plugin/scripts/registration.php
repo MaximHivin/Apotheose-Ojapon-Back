@@ -26,7 +26,7 @@ function ojapon_rest_user_register_handler($request)
     $response = array();
 
     $authorized_roles = [
-        'subscriber'
+        'traveler'
     ];
 
     // Recuperation du formulaire sous un format JSON
