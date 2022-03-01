@@ -6,6 +6,12 @@ function ojapon_create_roles()
     // cloning subscriber role
     $role = add_role( 'traveler', 'Traveler', get_role( 'subscriber' )->capabilities );
 
+    // as remove_role() is not working as intended, I have to check if $role was null (in case it already exists)
+    // this is a quick workaround, this must be fixed in a next version
+    if(is_null($role)) {
+        $role = get_role( 'traveler' );
+    }
+
     // adding custom capabilities for Point of interest
     $role->add_cap( 'read_poi');
     $role->add_cap( 'read_private_pois' );
@@ -16,9 +22,9 @@ function ojapon_create_roles()
     //todo adding custom capabilities for travel guide
 }
 
-
 function ojapon_remove_roles()
 {
+    //!todo this function doesn't seem to do the job, the custom role is NOT removed from WP when deactivating the plugin...
     remove_role('traveler');
 }
 
