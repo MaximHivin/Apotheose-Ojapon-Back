@@ -64,7 +64,7 @@ function insert_initial_locations($taxonomy, $object_type, $args) {
 	var_dump($object_type);
 	var_dump($args); */
     if ($taxonomy === 'location') {
-		require_once(plugin_dir_path(__FILE__) . '../data/taxonomies_data.php');
+		include(plugin_dir_path(__FILE__) . '../data/taxonomies_data.php');
 		foreach($prefectures as $value) {
 			wp_insert_term($value, $taxonomy);
 		}

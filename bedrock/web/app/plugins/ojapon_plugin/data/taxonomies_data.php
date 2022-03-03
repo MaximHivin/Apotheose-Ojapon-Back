@@ -60,7 +60,7 @@ $seasons = array (
     "Automne"
 );
 
-$tags = array (
+$genres = array (
     "Divertissement",
     "Shopping",
     "Parc & Jardin",
