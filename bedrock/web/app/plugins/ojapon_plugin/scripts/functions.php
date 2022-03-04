@@ -21,3 +21,27 @@ function insert_initial_data($taxonomy, $data = [], $args = []) {
             
         }
 }
+
+function mod_jwt_auth_valid_credential_response( $response, $user ) {
+    $user_info = get_user_by( 'email',  $user->data->user_email );
+    $token = $response['data']['token'];
+    $response = array(
+        'success'    => true,
+        'statusCode' => 200,
+        'code'       => 'jwt_auth_valid_credential',
+        'message'    => __( 'Credential is valid', 'jwt-auth' ),
+        'data'       => array(
+            'token'       => $token,
+            'id'          => $user->ID,
+            'email'       => $user->user_email,
+            'nicename'    => $user->user_nicename,
+            'firstName'   => $user->first_name,
+            'lastName'    => $user->last_name,
+            'displayName' => $user->display_name,
+            'roles'       => $user_info->roles[0],
+        ),
+    );
+    
+    return $response;
+}
+add_filter( 'jwt_auth_valid_credential_response', 'mod_jwt_auth_valid_credential_response', 10, 2 ); 
