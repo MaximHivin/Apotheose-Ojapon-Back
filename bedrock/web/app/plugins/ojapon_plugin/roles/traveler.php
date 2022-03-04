@@ -6,8 +6,8 @@ function ojapon_create_roles()
     // cloning subscriber role
     $role = add_role( 'traveler', 'Traveler', get_role( 'subscriber' )->capabilities );
 
-    // as remove_role() is not working as intended, I have to check if $role was null (in case it already exists)
-    // this is a quick workaround, this must be fixed in a next version
+    // if the role already exists, we just retrieve the role
+    
     if(is_null($role)) {
         $role = get_role( 'traveler' );
     }
@@ -19,12 +19,20 @@ function ojapon_create_roles()
     $role->add_cap( 'edit_pois' );
     $role->add_cap( 'delete_private_pois' );
 
-    //todo adding custom capabilities for travel guide
+    //adding custom capabilities for travel guide
+    $role->add_cap( 'read_travelguide');
+    $role->add_cap( 'read_private_travelguides' );
+    $role->add_cap( 'edit_travelguide' );
+    $role->add_cap( 'edit_travelguides' );
+    $role->add_cap( 'delete_private_travelguides' );
+    $role->add_cap( 'publish_travelguides' );
+    $role->add_cap( 'edit_published_travelguides' );
+    $role->add_cap( 'delete_published_travelguides' );
 }
 
 function ojapon_remove_roles()
 {
-    //!todo this function doesn't seem to do the job, the custom role is NOT removed from WP when deactivating the plugin...
+    
     remove_role('traveler');
 }
 
@@ -43,7 +51,18 @@ function ojapon_add_cap_roles() {
     $role->add_cap( 'delete_others_pois' );
     $role->add_cap( 'delete_published_pois' );
 
-    //todo adding custom capabilities for travel guide
+    //adding custom capabilities for travel guide
+    $role->add_cap( 'read_travelguide');
+    $role->add_cap( 'read_private_travelguides' );
+    $role->add_cap( 'edit_travelguide' );
+    $role->add_cap( 'edit_travelguides' );
+    $role->add_cap( 'delete_private_travelguides' );
+    $role->add_cap( 'publish_travelguides' );
+    $role->add_cap( 'edit_others_travelguides' );
+    $role->add_cap( 'edit_published_travelguides' );
+    $role->add_cap( 'delete_others_travelguides' );
+    $role->add_cap( 'delete_published_travelguides' );
+
 }
 
 
@@ -63,5 +82,16 @@ function ojapon_remove_cap_roles() {
     $role->remove_cap( 'delete_others_pois' );
     $role->remove_cap( 'delete_published_pois' );
 
-    //todo removing custom capabilities for travel guide
+    //removing custom capabilities for travel guide
+    $role->remove_cap( 'read_travelguide');
+    $role->remove_cap( 'read_private_travelguides' );
+    $role->remove_cap( 'edit_travelguide' );
+    $role->remove_cap( 'edit_travelguides' );
+    $role->remove_cap( 'delete_private_travelguides' );
+    $role->remove_cap( 'publish_travelguides' );
+    $role->remove_cap( 'edit_others_travelguides' );
+    $role->remove_cap( 'edit_published_travelguides' );
+    $role->remove_cap( 'delete_others_travelguides' );
+    $role->remove_cap( 'delete_published_travelguides' );
+
 }
