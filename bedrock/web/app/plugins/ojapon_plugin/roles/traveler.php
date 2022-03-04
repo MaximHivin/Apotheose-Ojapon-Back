@@ -19,7 +19,12 @@ function ojapon_create_roles()
     $role->add_cap( 'edit_pois' );
     $role->add_cap( 'delete_private_pois' );
 
-    //todo adding custom capabilities for travel guide
+    //adding custom capabilities for travel guide
+    $role->add_cap( 'read_travel-guide');
+    $role->add_cap( 'read_private_travel-guides' );
+    $role->add_cap( 'edit_travel-guide' );
+    $role->add_cap( 'edit_travel-guides' );
+    $role->add_cap( 'delete_private_travel-guides' );
 }
 
 function ojapon_remove_roles()
@@ -43,7 +48,18 @@ function ojapon_add_cap_roles() {
     $role->add_cap( 'delete_others_pois' );
     $role->add_cap( 'delete_published_pois' );
 
-    //todo adding custom capabilities for travel guide
+    //adding custom capabilities for travel guide
+    $role->add_cap( 'read_travel-guide');
+    $role->add_cap( 'read_private_travel-guides' );
+    $role->add_cap( 'edit_travel-guide' );
+    $role->add_cap( 'edit_travel-guides' );
+    $role->add_cap( 'delete_private_travel-guides' );
+    $role->add_cap( 'publish_travel-guides' );
+    $role->add_cap( 'edit_others_travel-guides' );
+    $role->add_cap( 'edit_published_travel-guides' );
+    $role->add_cap( 'delete_others_travel-guides' );
+    $role->add_cap( 'delete_published_travel-guides' );
+
 }
 
 
@@ -63,5 +79,16 @@ function ojapon_remove_cap_roles() {
     $role->remove_cap( 'delete_others_pois' );
     $role->remove_cap( 'delete_published_pois' );
 
-    //todo removing custom capabilities for travel guide
+    //removing custom capabilities for travel guide
+    $role->remove_cap( 'read_travel-guide');
+    $role->remove_cap( 'read_private_travel-guides' );
+    $role->remove_cap( 'edit_travel-guide' );
+    $role->remove_cap( 'edit_travel-guides' );
+    $role->remove_cap( 'delete_private_travel-guides' );
+    $role->remove_cap( 'publish_travel-guides' );
+    $role->remove_cap( 'edit_others_travel-guides' );
+    $role->remove_cap( 'edit_published_travel-guides' );
+    $role->remove_cap( 'delete_others_travel-guides' );
+    $role->remove_cap( 'delete_published_travel-guides' );
+
 }

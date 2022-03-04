@@ -47,6 +47,23 @@ function travel_guide_init() {
 			'show_in_rest'          => true,
 			'rest_base'             => 'travel-guide',
 			'rest_controller_class' => 'WP_REST_Posts_Controller',
+
+			// adding custom capabilities to map with custom user role
+			
+			'capabilities'			=> array(
+				'read_post'				=> 'read_travel-guide',
+				'read_private_posts'	=> 'read_private_travel-guides',
+				'edit_post'          	=> 'edit_travel-guide',
+				'edit_posts'         	=> 'edit_travel-guides',
+				'create_posts'       	=> 'edit_travel-guides',
+				'edit_others_posts'		=> 'edit_others_travel-guides',
+				'edit_published_posts'	=> 'edit_published_travel-guides',
+				'publish_posts'      	=> 'publish_travel-guides',
+				'delete_post'        	=> 'delete_travel-guide', 
+				'delete_others_posts' 	=> 'delete_others_travel-guides',
+				'delete_private_posts' 	=> 'delete_private_travel-guides',
+				'delete_published_posts' => 'delete_published_travel-guides'
+			),
 		]
 	);
 
