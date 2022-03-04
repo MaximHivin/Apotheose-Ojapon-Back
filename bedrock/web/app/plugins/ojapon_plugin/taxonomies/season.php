@@ -52,6 +52,20 @@ function season_init() {
 
 add_action( 'init', 'season_init' );
 
+function insert_initial_season($taxonomy, $object_type, $args) {
+	/* var_dump('here insert_initial_locations for ' .$taxonomy); 
+	var_dump($object_type);
+	var_dump($args); */
+    if ($taxonomy === 'season') {
+		include(plugin_dir_path(__FILE__) . '../data/taxonomies_data.php');
+		foreach($seasons as $value) {
+			wp_insert_term($value, $taxonomy);
+		}
+    }
+	
+}
+add_action('registered_taxonomy', 'insert_initial_season', 10, 3 );
+
 /**
  * Sets the post updated messages for the `season` taxonomy.
  *

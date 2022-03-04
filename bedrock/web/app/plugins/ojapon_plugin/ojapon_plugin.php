@@ -20,7 +20,7 @@ include plugin_dir_path(__FILE__) . 'post-types/poi.php';
 // custom taxonomies
 include plugin_dir_path(__FILE__) . 'taxonomies/location.php';
 include plugin_dir_path(__FILE__) . 'taxonomies/genre.php';
-//include plugin_dir_path(__FILE__) . 'taxonomies/season.php'; // not used for v1.0
+include plugin_dir_path(__FILE__) . 'taxonomies/season.php'; 
 
 // custom role
 include plugin_dir_path(__FILE__) . 'roles/traveler.php';
