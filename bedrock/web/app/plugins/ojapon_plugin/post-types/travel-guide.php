@@ -5,7 +5,7 @@
  */
 function travel_guide_init() {
 	register_post_type(
-		'travel-guide',
+		'travelguide',
 		[
 			'labels'                => [
 				'name'                  => __( 'Travel Guides', 'ojapon_plugin' ),
@@ -15,10 +15,10 @@ function travel_guide_init() {
 				'attributes'            => __( 'Travel Guide Attributes', 'ojapon_plugin' ),
 				'insert_into_item'      => __( 'Insert into Travel Guide', 'ojapon_plugin' ),
 				'uploaded_to_this_item' => __( 'Uploaded to this Travel Guide', 'ojapon_plugin' ),
-				'featured_image'        => _x( 'Featured Image', 'travel-guide', 'ojapon_plugin' ),
-				'set_featured_image'    => _x( 'Set featured image', 'travel-guide', 'ojapon_plugin' ),
-				'remove_featured_image' => _x( 'Remove featured image', 'travel-guide', 'ojapon_plugin' ),
-				'use_featured_image'    => _x( 'Use as featured image', 'travel-guide', 'ojapon_plugin' ),
+				'featured_image'        => _x( 'Featured Image', 'travelguide', 'ojapon_plugin' ),
+				'set_featured_image'    => _x( 'Set featured image', 'travelguide', 'ojapon_plugin' ),
+				'remove_featured_image' => _x( 'Remove featured image', 'travelguide', 'ojapon_plugin' ),
+				'use_featured_image'    => _x( 'Use as featured image', 'travelguide', 'ojapon_plugin' ),
 				'filter_items_list'     => __( 'Filter Travel Guides list', 'ojapon_plugin' ),
 				'items_list_navigation' => __( 'Travel Guides list navigation', 'ojapon_plugin' ),
 				'items_list'            => __( 'Travel Guides list', 'ojapon_plugin' ),
@@ -45,25 +45,29 @@ function travel_guide_init() {
 			'menu_position'         => null,
 			'menu_icon'             => 'dashicons-admin-site-alt2',
 			'show_in_rest'          => true,
-			'rest_base'             => 'travel-guide',
+			'rest_base'             => 'travelguide',
 			'rest_controller_class' => 'WP_REST_Posts_Controller',
 
 			// adding custom capabilities to map with custom user role
-			
+
 			'capabilities'			=> array(
-				'read_post'				=> 'read_travel-guide',
-				'read_private_posts'	=> 'read_private_travel-guides',
-				'edit_post'          	=> 'edit_travel-guide',
-				'edit_posts'         	=> 'edit_travel-guides',
-				'create_posts'       	=> 'edit_travel-guides',
-				'edit_others_posts'		=> 'edit_others_travel-guides',
-				'edit_published_posts'	=> 'edit_published_travel-guides',
-				'publish_posts'      	=> 'publish_travel-guides',
-				'delete_post'        	=> 'delete_travel-guide', 
-				'delete_others_posts' 	=> 'delete_others_travel-guides',
-				'delete_private_posts' 	=> 'delete_private_travel-guides',
-				'delete_published_posts' => 'delete_published_travel-guides'
+				'read_post'				=> 'read_travelguide',
+				'read_private_posts'	=> 'read_private_travelguides',
+				'edit_post'          	=> 'edit_travelguide',
+				'edit_posts'         	=> 'edit_travelguides',
+				'create_posts'       	=> 'edit_travelguides',
+				'edit_others_posts'		=> 'edit_others_travelguides',
+				'edit_published_posts'	=> 'edit_published_travelguides',
+				'publish_posts'      	=> 'publish_travelguides',
+				'delete_post'        	=> 'delete_travelguide', 
+				'delete_others_posts' 	=> 'delete_others_travelguides',
+				'delete_private_posts' 	=> 'delete_private_travelguides',
+				'delete_published_posts' => 'delete_published_travelguides'
 			),
+
+			// mapping custom capabilities to WordPress’ primitive capabilities
+			'map_meta_cap'			=> true,
+			
 		]
 	);
 
@@ -82,7 +86,7 @@ function travel_guide_updated_messages( $messages ) {
 
 	$permalink = get_permalink( $post );
 
-	$messages['travel-guide'] = [
+	$messages['travelguide'] = [
 		0  => '', // Unused. Messages start at index 1.
 		/* translators: %s: post permalink */
 		1  => sprintf( __( 'Travel Guide updated. <a target="_blank" href="%s">View Travel Guide</a>', 'ojapon_plugin' ), esc_url( $permalink ) ),
@@ -118,7 +122,7 @@ add_filter( 'post_updated_messages', 'travel_guide_updated_messages' );
 function travel_guide_bulk_updated_messages( $bulk_messages, $bulk_counts ) {
 	global $post;
 
-	$bulk_messages['travel-guide'] = [
+	$bulk_messages['travelguide'] = [
 		/* translators: %s: Number of Travel Guides. */
 		'updated'   => _n( '%s Travel Guide updated.', '%s Travel Guides updated.', $bulk_counts['updated'], 'ojapon_plugin' ),
 		'locked'    => ( 1 === $bulk_counts['locked'] ) ? __( '1 Travel Guide not updated, somebody is editing it.', 'ojapon_plugin' ) :

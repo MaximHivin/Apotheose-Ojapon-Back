@@ -20,14 +20,14 @@ function ojapon_create_roles()
     $role->add_cap( 'delete_private_pois' );
 
     //adding custom capabilities for travel guide
-    $role->add_cap( 'read_travel-guide');
-    $role->add_cap( 'read_private_travel-guides' );
-    $role->add_cap( 'edit_travel-guide' );
-    $role->add_cap( 'edit_travel-guides' );
-    $role->add_cap( 'delete_private_travel-guides' );
-    $role->add_cap( 'publish_travel-guides' );
-    $role->add_cap( 'edit_published_travel-guides' );
-    $role->add_cap( 'delete_published_travel-guides' );
+    $role->add_cap( 'read_travelguide');
+    $role->add_cap( 'read_private_travelguides' );
+    $role->add_cap( 'edit_travelguide' );
+    $role->add_cap( 'edit_travelguides' );
+    $role->add_cap( 'delete_private_travelguides' );
+    $role->add_cap( 'publish_travelguides' );
+    $role->add_cap( 'edit_published_travelguides' );
+    $role->add_cap( 'delete_published_travelguides' );
 }
 
 function ojapon_remove_roles()
@@ -52,16 +52,16 @@ function ojapon_add_cap_roles() {
     $role->add_cap( 'delete_published_pois' );
 
     //adding custom capabilities for travel guide
-    $role->add_cap( 'read_travel-guide');
-    $role->add_cap( 'read_private_travel-guides' );
-    $role->add_cap( 'edit_travel-guide' );
-    $role->add_cap( 'edit_travel-guides' );
-    $role->add_cap( 'delete_private_travel-guides' );
-    $role->add_cap( 'publish_travel-guides' );
-    $role->add_cap( 'edit_others_travel-guides' );
-    $role->add_cap( 'edit_published_travel-guides' );
-    $role->add_cap( 'delete_others_travel-guides' );
-    $role->add_cap( 'delete_published_travel-guides' );
+    $role->add_cap( 'read_travelguide');
+    $role->add_cap( 'read_private_travelguides' );
+    $role->add_cap( 'edit_travelguide' );
+    $role->add_cap( 'edit_travelguides' );
+    $role->add_cap( 'delete_private_travelguides' );
+    $role->add_cap( 'publish_travelguides' );
+    $role->add_cap( 'edit_others_travelguides' );
+    $role->add_cap( 'edit_published_travelguides' );
+    $role->add_cap( 'delete_others_travelguides' );
+    $role->add_cap( 'delete_published_travelguides' );
 
 }
 
@@ -83,15 +83,15 @@ function ojapon_remove_cap_roles() {
     $role->remove_cap( 'delete_published_pois' );
 
     //removing custom capabilities for travel guide
-    $role->remove_cap( 'read_travel-guide');
-    $role->remove_cap( 'read_private_travel-guides' );
-    $role->remove_cap( 'edit_travel-guide' );
-    $role->remove_cap( 'edit_travel-guides' );
-    $role->remove_cap( 'delete_private_travel-guides' );
-    $role->remove_cap( 'publish_travel-guides' );
-    $role->remove_cap( 'edit_others_travel-guides' );
-    $role->remove_cap( 'edit_published_travel-guides' );
-    $role->remove_cap( 'delete_others_travel-guides' );
-    $role->remove_cap( 'delete_published_travel-guides' );
+    $role->remove_cap( 'read_travelguide');
+    $role->remove_cap( 'read_private_travelguides' );
+    $role->remove_cap( 'edit_travelguide' );
+    $role->remove_cap( 'edit_travelguides' );
+    $role->remove_cap( 'delete_private_travelguides' );
+    $role->remove_cap( 'publish_travelguides' );
+    $role->remove_cap( 'edit_others_travelguides' );
+    $role->remove_cap( 'edit_published_travelguides' );
+    $role->remove_cap( 'delete_others_travelguides' );
+    $role->remove_cap( 'delete_published_travelguides' );
 
 }
