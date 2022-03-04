@@ -6,8 +6,8 @@ function ojapon_create_roles()
     // cloning subscriber role
     $role = add_role( 'traveler', 'Traveler', get_role( 'subscriber' )->capabilities );
 
-    // as remove_role() is not working as intended, I have to check if $role was null (in case it already exists)
-    // this is a quick workaround, this must be fixed in a next version
+    // if the role already exists, we just retrieve the role
+    
     if(is_null($role)) {
         $role = get_role( 'traveler' );
     }
@@ -25,11 +25,14 @@ function ojapon_create_roles()
     $role->add_cap( 'edit_travel-guide' );
     $role->add_cap( 'edit_travel-guides' );
     $role->add_cap( 'delete_private_travel-guides' );
+    $role->add_cap( 'publish_travel-guides' );
+    $role->add_cap( 'edit_published_travel-guides' );
+    $role->add_cap( 'delete_published_travel-guides' );
 }
 
 function ojapon_remove_roles()
 {
-    //!todo this function doesn't seem to do the job, the custom role is NOT removed from WP when deactivating the plugin...
+    
     remove_role('traveler');
 }
 
