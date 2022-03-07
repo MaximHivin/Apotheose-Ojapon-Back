@@ -44,7 +44,7 @@ function genre_init() {
 			'back_to_items'              => __( '&larr; Back to Genres', 'ojapon_plugin' ),
 		],
 		'show_in_rest'          => true,
-		'rest_base'             => 'genre',
+		'rest_base'             => 'genres',
 		'rest_controller_class' => 'WP_REST_Terms_Controller',
 	] );
 

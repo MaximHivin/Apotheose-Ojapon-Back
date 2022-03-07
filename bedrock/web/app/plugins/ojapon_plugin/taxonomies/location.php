@@ -44,7 +44,7 @@ function location_init() {
 			'back_to_items'              => __( '&larr; Back to Locations', 'ojapon_plugin' ),
 		],
 		'show_in_rest'          => true,
-		'rest_base'             => 'location',
+		'rest_base'             => 'locations',
 		'rest_controller_class' => 'WP_REST_Terms_Controller',
 	] );
 

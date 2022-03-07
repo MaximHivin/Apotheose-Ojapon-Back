@@ -44,7 +44,7 @@ function season_init() {
 			'back_to_items'              => __( '&larr; Back to Seasons', 'ojapon_plugin' ),
 		],
 		'show_in_rest'          => true,
-		'rest_base'             => 'season',
+		'rest_base'             => 'seasons',
 		'rest_controller_class' => 'WP_REST_Terms_Controller',
 	] );
 
