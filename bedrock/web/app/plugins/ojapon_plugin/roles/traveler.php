@@ -17,6 +17,7 @@ function ojapon_create_roles()
     $role->add_cap( 'read_private_pois' );
     $role->add_cap( 'edit_poi' );
     $role->add_cap( 'edit_pois' );
+    $role->add_cap( 'publish_pois' );
     $role->add_cap( 'delete_private_pois' );
 
     //adding custom capabilities for travel guide
