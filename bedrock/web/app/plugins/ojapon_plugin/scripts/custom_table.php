@@ -45,7 +45,9 @@ function ojapon_rest_link_poi()
         }
     ));
 
-    /* register_rest_route('ojapon_plugin/v1', 'link_poi', array(
+    /* 
+    //? this method receives its parameters via a form or an object
+    register_rest_route('ojapon_plugin/v1', 'link_poi', array(
         'methods' => ['POST', 'DELETE'],
         'callback' => 'ojapon_rest_link_poi_handler',
         'permission_callback' => function () {
@@ -56,7 +58,7 @@ function ojapon_rest_link_poi()
 
 function ojapon_rest_link_poi_handler($request)
 {
-    // $request est une instance de WP_REST_Request
+    // $request is an instance of WP_REST_Request
     $http_method = $request->get_method();
 
     global $wpdb;
@@ -67,8 +69,8 @@ function ojapon_rest_link_poi_handler($request)
     //retrieve query params
     $parameters = $request->get_params();
 
-    // Preparation response HTTP
-    //todo exemple, à modifier
+    // Prepare response HTTP
+    // todo example, to modify
     $response = array(
         'parameters'   => $parameters,
         'httpMethod'    => $http_method
@@ -176,12 +178,9 @@ Param possibles :
 Sont à créer : 
 ---------------
 /wp-json/wp/v2/travelguide/74/poi --> liste tous les POI liés au guide 74
+
 /wp-json/wp/v2//travelguide/74/poi/25 --> 
     en POST --> ajoute dans la table le lien entre le guide 74 et le poi 25
     en DELETE --> supprime l'enregistrement qui lie le guide 74 et le poi 25
 
-/wp-json/wp/v2/link_poi
-body : 
-    idguide: 74
-    idpoi: 25
 */
