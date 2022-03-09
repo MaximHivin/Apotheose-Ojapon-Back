@@ -39,7 +39,7 @@ function poi_init() {
 			'show_ui'               => true,
 			'show_in_menu'			=> true,
 			'show_in_nav_menus'     => true,
-			'supports'              => [ 'title', 'editor', 'thumbnail', 'comments' ],
+			'supports'              => [ 'title', 'editor', 'thumbnail', 'comments', 'author' ],
 			// adding custom capabilities to map with custom user role
 			//'capability_type'		=> array ( 'poi', 'pois' ),
 			'capabilities'			=> array(

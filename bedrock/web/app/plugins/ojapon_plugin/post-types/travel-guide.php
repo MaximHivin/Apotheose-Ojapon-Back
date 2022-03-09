@@ -38,7 +38,7 @@ function travel_guide_init() {
 			'hierarchical'          => false,
 			'show_ui'               => true,
 			'show_in_nav_menus'     => true,
-			'supports'              => [ 'title', 'editor', 'thumbnail'],
+			'supports'              => [ 'title', 'editor', 'thumbnail', 'author', 'comments'],
 			'has_archive'           => true,
 			'rewrite'               => true,
 			'query_var'             => true,

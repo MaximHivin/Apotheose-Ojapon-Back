@@ -11,7 +11,6 @@
 
 
 // additionnal scripts
-include plugin_dir_path(__FILE__) . 'scripts/custom_table.php';
 include plugin_dir_path(__FILE__) . 'scripts/functions.php';
 // custom post types
 include plugin_dir_path(__FILE__) . 'post-types/travel-guide.php';
@@ -28,6 +27,9 @@ include plugin_dir_path(__FILE__) . 'roles/traveler.php';
 // user registration via WP API
 include plugin_dir_path(__FILE__) . 'scripts/registration.php';
 
+// custom table to link CPTs
+include plugin_dir_path(__FILE__) . 'scripts/custom_table.php';
+
 
 register_activation_hook(__FILE__, function () {
     // creating custom role
@@ -36,7 +38,7 @@ register_activation_hook(__FILE__, function () {
     // defining new role capabilities
     ojapon_add_cap_roles();
 
-   // creating custom table to link travel guides to points of interest
+    // creating custom table to link travel guides to points of interest
     ojapon_create_custom_table();
 
 });
@@ -46,6 +48,6 @@ register_deactivation_hook(__FILE__, function () {
     ojapon_remove_cap_roles();
 
     // in dev environment, I don't want my custom table to be dropped each time I deactivate the plugin for testing purposes
-    // but in live mode, the following line should be uncommented
+    // but in live mode, the following line should be uncommented and the user warned about the loss of stored data in this table
     //ojapon_drop_custom_table();
 });
