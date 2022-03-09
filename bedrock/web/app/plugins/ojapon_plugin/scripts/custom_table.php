@@ -81,7 +81,7 @@ function ojapon_rest_link_poi_handler($request)
     $idguide = $parameters['idguide'];
     $idpoi = $parameters['idpoi'];
 
-    //vérifie que les id sont strictement supérieurs à zéro
+    //checks that the ids are strictly greater than zero
     if($idguide <= 0 || $idpoi <= 0) {
         $error->add(400, "IDs should be positive integers", array('status' => 400));
         return $error;
@@ -94,22 +94,22 @@ function ojapon_rest_link_poi_handler($request)
     $response['idguidefiltered'] = $idguide;
     $idpoi = filter_var($parameters['idpoi'], FILTER_SANITIZE_NUMBER_INT); */
 
-    // Verification du contenu du formulaire
-    //! pour exemple, à modifier
+    // Verification of form content
+    //! for example, to modify 
     /* if (empty($idguide)) {
         $error->add(400, "The provided parameter for guide is not an integer", array('status' => 400));
         return $error;
     } */
 
-    // si method = POST --> on fait une insertion
+    // if method = POST --> we make an insertion
     if($http_method == 'POST') {
-        // on peut faire une vérification de l'existence du guide et du point d'intérêt passés en param
+        // we can check the existence of the guide and the point of interest passed in param
         $query = "SELECT * FROM `wp_ojapon_guide_poi` WHERE `guide_id` =" .$idguide . " AND `poi_id` = " . $idpoi;
         $result = $wpdb->get_row($query);
         
-        // si $result est null, c'est que le lien n'existe pas encore
+        // if $result is null, the link does not yet exist
         if(is_null($result)) {
-            // on fait le lien entre les deux CPT travelguide et poi
+            // we make the link between the two CPT travelguide and poi
             $result = $wpdb->insert(
                 'wp_ojapon_guide_poi',
                 [
@@ -118,45 +118,45 @@ function ojapon_rest_link_poi_handler($request)
                 ]
             );
 
-            // si insertion ok, on renvoie un 201 Created
+            // if insertion ok, we return a 201 Created
             if($result == 1) {
                 $response['code'] = 201;
                 $response['message'] = "Successfully Linked";
             } 
-            // sinon message d'erreur
+            // otherwise error message
             else {
                 $error->add(400, "Link couldn't be inserted in database", array('status' => 400));
                 return $error;
             }
         }
-        // sinon on renvoie une erreur
+        // otherwise an error is returned
         else {
             $error->add(400, "This Point of interest is already linked to this travel guide", array('status' => 400));
             return $error;
         }
     } 
     
-    //si method = DELETE --> on supprime le lien
+    //if method = DELETE --> we delete the link
     elseif ($http_method == 'DELETE') {
-        // on peut vérifier en une requête que le lien existe et le supprimer le cas échéant
-        // s'il existe, on supprime l'enregistrement correspondant dans la table, sinon on renvoie false
+        // we can check in a request that the link exists and delete it if necessary
+        // if it exists, we delete the corresponding record in the table, otherwise we return false
         $result = $wpdb->delete( 'wp_ojapon_guide_poi', array( 'guide_id' => $idguide, 'poi_id' => $idpoi ) );
 
-        // si suppression ok, on renvoie un 200 OK
+        // if deletion ok, we return a 200 OK
         if($result >= 1) {
             $response['code'] = 200;
             $response['message'] = "Successfully Unlinked";
         } 
-        // sinon message d'erreur
+        // otherwise error message
         else {
             $error->add(400, "This Point of interest is not linked to this travel guide", array('status' => 400));
             return $error;
         }
     }
-    // si aucune méthode n'est la bonne --> on renvoie une erreur
-    // cette condition ne devrait jamais être vérifiée car on n'autorise que POST et DELETE dans la déclaration de la route
+    // if neithermethod is correct --> we return an error 
+    // this condition should never be checked because we only allow POST and DELETE in the route declaration
     else {
-        // message d'erreur (méthode non autorisée)
+        // error message (méthod not authorized)
         $error->add(405, "This method is not allowed for this route", array('status' => 405));
         return $error;
     }
@@ -177,10 +177,26 @@ Param possibles :
 
 Sont à créer : 
 ---------------
-/wp-json/wp/v2/travelguide/74/poi --> liste tous les POI liés au guide 74
+
 
 /wp-json/wp/v2//travelguide/74/poi/25 --> 
     en POST --> ajoute dans la table le lien entre le guide 74 et le poi 25
     en DELETE --> supprime l'enregistrement qui lie le guide 74 et le poi 25
+
+
+/wp-json/wp/v2/travelguide/74/poi --> liste tous les POI liés au guide 74
+
+Voir pour créer nouvelle route custom sur le modèle ci-dessus
+on peut faire des requêtes internes à l'API : 
+https://developer.wordpress.org/rest-api/frequently-asked-questions/#can-i-make-api-requests-from-php-within-a-plugin
+https://developer.wordpress.org/reference/functions/rest_do_request/
+
+Puis à partir de l'id du guide, récupérer les poi liés 
+? en 2 temps
+    - récupérer tous les POI via une requête API interne
+    - filtrer cette liste par rapport à la table custom
+Ajouter ces POI à la response
+Renvoyer la response au front
+
 
 */
