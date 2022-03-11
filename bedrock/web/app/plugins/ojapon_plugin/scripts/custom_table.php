@@ -164,39 +164,59 @@ function ojapon_rest_link_poi_handler($request)
     return new WP_REST_Response($response, 123);
 };
 
-/*
-Existent déjà : 
---------------
-/wp-json/wp/v2/travelguide --> liste de tous les guides
-/wp-json/wp/v2/travelguide/74 --> le guide qui a l'id 74
+function ojapon_rest_get_poi_from_guide_handler(WP_REST_REQUEST $request)
+{
+    global $wpdb;
 
-Param possibles : 
-?_embed
-?author=1
-?_embed&author=1
+    // Preparation of errors in case of non-validation of data
+    $error = new WP_Error();
 
-Sont à créer : 
----------------
+    //retrieve query params
+    $parameters = $request->get_params();
+    $guideid = $parameters['idguide'];
 
+    // Prepare HTTP response
+    $response = array();
 
-/wp-json/wp/v2//travelguide/74/poi/25 --> 
-    en POST --> ajoute dans la table le lien entre le guide 74 et le poi 25
-    en DELETE --> supprime l'enregistrement qui lie le guide 74 et le poi 25
+    
 
+    // sql query to retrieve all POI linked to the specified guide
+    //$query = "SELECT * FROM `wp_ojapon_guide_poi` WHERE `guide_id` =" .$guideid;
+    $query = "SELECT `posts`.id FROM `wp_posts` AS posts
+    INNER JOIN `wp_ojapon_guide_poi` AS links
+    ON `posts`.id = `links`.poi_id
+    WHERE `links`.guide_id = " . $guideid;
 
-/wp-json/wp/v2/travelguide/74/poi --> liste tous les POI liés au guide 74
+    $sql = $wpdb->prepare(
+        "SELECT `posts`.id FROM `wp_posts` AS posts
+        INNER JOIN `wp_ojapon_guide_poi` AS links
+        ON `posts`.id = `links`.poi_id
+        WHERE `links`.guide_id = %d",
+        $guideid
+    );
 
-Voir pour créer nouvelle route custom sur le modèle ci-dessus
-on peut faire des requêtes internes à l'API : 
-https://developer.wordpress.org/rest-api/frequently-asked-questions/#can-i-make-api-requests-from-php-within-a-plugin
-https://developer.wordpress.org/reference/functions/rest_do_request/
-
-Puis à partir de l'id du guide, récupérer les poi liés 
-? en 2 temps
-    - récupérer tous les POI via une requête API interne
-    - filtrer cette liste par rapport à la table custom
-Ajouter ces POI à la response
-Renvoyer la response au front
-
-
-*/
+    $results = $wpdb->get_results($sql);
+ 
+    foreach ($results as $result) {
+        //$response[$result->id] = $result;
+        //call interne à l'api
+        // /wp-json/wp/v2/travelguide/76/poi
+        foreach ($results as $result) {
+            $wp_server= new WP_REST_Server();
+            //call interne à l'api
+            // /wp-json/wp/v2/travelguide/76/poi
+            $request = new WP_REST_Request('GET', '/wp/v2/poi/'.$result->id);
+            
+            // Set one or more request query parameters
+            //$request->set_param( '_embed', 1 );
+            //$request->set_param( '_links', 1 );
+            
+            //var_dump(json_encode(rest_do_request( $request )));
+            $response[] = $wp_server->response_to_data(rest_do_request($request), true);
+        }
+        // sinon message d'erreur
+    
+   
+        return new WP_REST_Response($response, 123);
+    }
+}
