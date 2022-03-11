@@ -209,6 +209,8 @@ function ojapon_rest_get_poi_from_guide_handler(WP_REST_REQUEST $request) {
         WHERE `links`.guide_id = %d", $guideid);
 
     $results = $wpdb->get_results($sql);
+
+    
  
     foreach ($results as $result) {
         //call interne à l'api
@@ -216,10 +218,12 @@ function ojapon_rest_get_poi_from_guide_handler(WP_REST_REQUEST $request) {
         $request = new WP_REST_Request( 'GET', '/wp/v2/poi/'.$result->id);
         // Set one or more request query parameters
         $request->set_param( '_embed', 1 );
-        $request->set_param( '_links', 1 );
-        $wp_server= new WP_REST_Server();
-        $response[] = $wp_server->response_to_data(rest_do_request( $request ), true);
+        $resp = rest_do_request( $request );
+        $response[] = rest_get_server()->response_to_data($resp, true);
     }
+    /* $request = new WP_REST_Request( 'GET', '/wp/v2/posts/1?_embed' );
+    $request->set_param( '_embed', 1 );
+    $response = rest_do_request( $request ); */
 
     // si insertion ok, on renvoie un 200
     /* if(sizeof($results) != 0) {
