@@ -164,6 +164,79 @@ function ojapon_rest_link_poi_handler($request)
     return new WP_REST_Response($response, 123);
 };
 
+
+add_action('rest_api_init', 'ojapon_rest_get_poi_from_guide');
+
+function ojapon_rest_get_poi_from_guide()
+{
+    // Defines a new route for our user registration
+    register_rest_route('wp/v2', '/travelguide/(?P<idguide>\d+)/poi', array(
+        'methods' => ['GET'],
+        'callback' => 'ojapon_rest_get_poi_from_guide_handler',
+        'args' => [
+            'idguide'
+        ],
+        'permission_callback' => function () {
+            return true;
+        }
+    ));
+
+}
+
+function ojapon_rest_get_poi_from_guide_handler(WP_REST_REQUEST $request) {
+    global $wpdb;
+
+    // Preparation of errors in case of non-validation of data
+    $error = new WP_Error();
+
+    //retrieve query params
+    $parameters = $request->get_params();
+    $guideid = $parameters['idguide'];
+
+    // Prepare HTTP response
+    $response = array();
+
+    // sql query to retrieve all POI linked to the specified guide
+    $query = "SELECT `posts`.id FROM `wp_posts` AS posts
+    INNER JOIN `wp_ojapon_guide_poi` AS links
+    ON `posts`.id = `links`.poi_id
+    WHERE `links`.guide_id = " . $guideid;
+
+    $sql = $wpdb->prepare(
+        "SELECT `posts`.id FROM `wp_posts` AS posts
+        INNER JOIN `wp_ojapon_guide_poi` AS links
+        ON `posts`.id = `links`.poi_id
+        WHERE `links`.guide_id = %d", $guideid);
+
+    $results = $wpdb->get_results($sql);
+ 
+    foreach ($results as $result) {
+        //call interne à l'api
+        // /wp-json/wp/v2/travelguide/76/poi
+        $request = new WP_REST_Request( 'GET', '/wp/v2/poi/'.$result->id);
+        // Set one or more request query parameters
+        $request->set_param( '_embed', 1 );
+        $request->set_param( '_links', 1 );
+        $wp_server= new WP_REST_Server();
+        $response[] = $wp_server->response_to_data(rest_do_request( $request ), true);
+    }
+
+    // si insertion ok, on renvoie un 200
+    /* if(sizeof($results) != 0) {
+        $response['code'] = 200;
+        $response['message'] = "I have things";
+    } 
+    // sinon message d'erreur
+    else {
+        //$error->add(404, "There's nothing here", array('status' => 404));
+        //return $error;
+    } */
+
+   
+    return new WP_REST_Response($response, 123);
+
+}
+
 /*
 Existent déjà : 
 --------------
