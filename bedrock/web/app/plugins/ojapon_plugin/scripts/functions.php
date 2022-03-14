@@ -45,3 +45,20 @@ function mod_jwt_auth_valid_credential_response( $response, $user ) {
     return $response;
 }
 add_filter( 'jwt_auth_valid_credential_response', 'mod_jwt_auth_valid_credential_response', 10, 2 ); 
+
+/**
+ * Allows specified client to send POST and DELETE requests to WP
+ *
+ * @param [type] $value
+ * @return void
+ */
+function initCors($value)
+{
+    $origin_url = 'http://localhost:8080';
+  
+    header('Access-Control-Allow-Origin: ' . $origin_url);
+    header('Access-Control-Allow-Methods: GET, POST, DELETE');
+    header('Access-Control-Allow-Credentials: true');
+    return $value;
+}
+add_action( 'rest_api_init', 'initCors');
