@@ -109,9 +109,7 @@ function ojapon_rest_comment_meta_handler($request)
     $result = $wpdb->get_row($query);
 
     // Prepare response HTTP
-    $response = array(
-        'user' => $current_user
-    );
+    $response = array();
     // si $result est null, que l'user n'a pas encore commenté
     if (is_null($result)) {
         $comment_data = array(
