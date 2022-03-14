@@ -57,8 +57,9 @@ function initCors($value)
     $origin_url = 'http://localhost:8080';
   
     header('Access-Control-Allow-Origin: ' . $origin_url);
-    header('Access-Control-Allow-Methods: GET, POST, DELETE');
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
     header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Headers: Origin, X-Requested-With, X-WP-Nonce, Content-Type, Accept, Authorization');
     return $value;
 }
 add_action( 'rest_api_init', 'initCors');
