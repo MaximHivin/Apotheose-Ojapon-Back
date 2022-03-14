@@ -109,7 +109,9 @@ function ojapon_rest_comment_meta_handler($request)
     $result = $wpdb->get_row($query);
 
     // Prepare response HTTP
-    $response = array();
+    $response = array(
+        'test' => 'test'
+    );
     // si $result est null, que l'user n'a pas encore commenté
     if (is_null($result)) {
         $comment_data = array(
@@ -125,7 +127,10 @@ function ojapon_rest_comment_meta_handler($request)
         if($result) {
             $response['code'] = 201;
             $response['message'] = "Comment successfully added";
-        } 
+        }  else {
+            $error->add(400, "Comment couldn't be inserted", array('status' => 400));
+            return $error;
+        }
     } else {
         // cet user a déjà commenté ce POI
         $error->add(400, "You already commented this point of interest", array('status' => 400));
