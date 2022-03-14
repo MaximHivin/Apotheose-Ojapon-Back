@@ -12,8 +12,9 @@ function ojapon_create_roles()
         $role = get_role( 'traveler' );
     }
 
-    //! todo check why this does not work
     $role->add_cap( 'upload_files');
+    $role->add_cap( 'manage_categories');
+    $role->add_cap( 'edit_posts');
 
     // adding custom capabilities for Point of interest
     $role->add_cap( 'read_poi');
