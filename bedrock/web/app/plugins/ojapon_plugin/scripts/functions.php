@@ -105,14 +105,12 @@ function ojapon_rest_comment_meta_handler($request)
 
     $current_user = wp_get_current_user();
 
-    // on vérifie en BDD si cet user a déjà commenté ce POI
-    $query = "SELECT * FROM `wp_comments` WHERE `comment_post_ID` =" .$params['post'] . " AND `user_id` = " . $current_user->ID;
+    // on vérifie en BDD si cet user a déjà commenté ce POI (on ne tient pas compte des commentaires supprimés)
+    $query = "SELECT * FROM `wp_comments` WHERE `comment_post_ID` =" .$params['post'] . " AND `user_id` = " . $current_user->ID . "AND `comment_approved` != 'trash'";
     $result = $wpdb->get_row($query);
 
     // Prepare response HTTP
-    $response = array(
-        'test' => 'test'
-    );
+    $response = array();
     // si $result est null, que l'user n'a pas encore commenté
     if (is_null($result)) {
         $comment_data = array(
